@@ -1,1 +1,0 @@
-# Serve exact size images

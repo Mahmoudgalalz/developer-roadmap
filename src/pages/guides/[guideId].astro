@@ -2,14 +2,16 @@
 import GuideHeader from '../../components/GuideHeader.astro';
 import MarkdownFile from '../../components/MarkdownFile.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getAllGuides, GuideFileType } from '../../lib/guide';
+import { getAllGuides, type GuideFileType } from '../../lib/guide';
 
 export interface Props {
   guide: GuideFileType;
 }
 
 export async function getStaticPaths() {
-  const guides = await getAllGuides();
+  const guides = (await getAllGuides()).filter(
+    (guide) => !guide.frontmatter.excludedBySlug,
+  );
 
   return guides.map((guide) => ({
     params: { guideId: guide.id },
@@ -30,7 +32,7 @@ const { frontmatter: guideData } = guide;
 >
   <GuideHeader guide={guide} />
 
-  <div class='bg-gray-50 py-5 sm:py-10'>
+  <div class='mx-auto max-w-[700px] py-5 sm:py-10'>
     <MarkdownFile>
       <guide.Content />
     </MarkdownFile>

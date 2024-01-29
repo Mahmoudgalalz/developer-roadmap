@@ -1,1 +1,0 @@
-# Avoid multiple inline js snippets

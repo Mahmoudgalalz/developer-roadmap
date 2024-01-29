@@ -1,1 +1,0 @@
-# Use non blocking javascript

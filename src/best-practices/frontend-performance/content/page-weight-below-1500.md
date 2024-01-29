@@ -1,1 +1,0 @@
-# Page weight below 1500
